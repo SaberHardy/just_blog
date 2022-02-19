@@ -41,7 +41,7 @@
         <div class="container">
 
             <div class="navbar-header d-flex align-items-center justify-content-between">
-                <a href="index.html" class="navbar-brand">Bootstrap Blog</a>
+                <a href="/" class="navbar-brand">Bootstrap Blog</a>
                 <!-- Toggle Button-->
                 <button type="button" data-toggle="collapse" data-target="#navbarcollapse"
                         aria-controls="navbarcollapse" aria-expanded="false" aria-label="Toggle navigation"
@@ -50,18 +50,18 @@
             <!-- Navbar Menu -->
             <div id="navbarcollapse" class="collapse navbar-collapse">
                 <ul class="navbar-nav ml-auto">
-                    <li class="nav-item"><a href="index.html" class="nav-link active ">Home</a>
+                    <li class="nav-item"><a href="/" class="nav-link active ">Home</a>
                     </li>
-                    <li class="nav-item"><a href="blog.html" class="nav-link ">Blog</a>
+                    <li class="nav-item"><a href="{% url 'blog' %}" class="nav-link ">Blog</a>
                     </li>
-                    <li class="nav-item"><a href="post.html" class="nav-link ">Post</a>
+                    <li class="nav-item"><a href="{% url 'post' %}" class="nav-link ">Post</a>
                     </li>
                     <li class="nav-item"><a href="#" class="nav-link ">Contact</a>
                     </li>
                 </ul>
                 <div class="navbar-text"><a href="#" class="search-btn"><i class="icon-search-1"></i></a></div>
-                <ul class="langs navbar-text"><a href="#" class="active">EN</a><span>           </span><a
-                        href="#">ES</a></ul>
+{#                <ul class="langs navbar-text"><a href="#" class="active">EN</a><span>           </span><a#}
+{#                        href="#">ES</a></ul>#}
             </div>
         </div>
     </nav>
@@ -110,19 +110,22 @@
             <div class="col-md-4">
                 <div class="latest-posts"><a href="#">
                     <div class="post d-flex align-items-center">
-                        <div class="image"><img src="{% static 'img/small-thumbnail-1.jpg' %}" alt="..." class="img-fluid"></div>
+                        <div class="image"><img src="{% static 'img/small-thumbnail-1.jpg' %}" alt="..."
+                                                class="img-fluid"></div>
                         <div class="title"><strong>Hotels for all budgets</strong><span class="date last-meta">October 26, 2016</span>
                         </div>
                     </div>
                 </a><a href="#">
                     <div class="post d-flex align-items-center">
-                        <div class="image"><img src="{% static 'img/small-thumbnail-2.jpg' %}" alt="..." class="img-fluid"></div>
+                        <div class="image"><img src="{% static 'img/small-thumbnail-2.jpg' %}" alt="..."
+                                                class="img-fluid"></div>
                         <div class="title"><strong>Great street atrs in London</strong><span class="date last-meta">October 26, 2016</span>
                         </div>
                     </div>
                 </a><a href="#">
                     <div class="post d-flex align-items-center">
-                        <div class="image"><img src="{% static 'img/small-thumbnail-3.jpg' %}" alt="..." class="img-fluid"></div>
+                        <div class="image"><img src="{% static 'img/small-thumbnail-3.jpg' %}" alt="..."
+                                                class="img-fluid"></div>
                         <div class="title"><strong>Best coffee shops in Sydney</strong><span class="date last-meta">October 26, 2016</span>
                         </div>
                     </div>
