@@ -25,6 +25,7 @@ class Post(models.Model):
     author = models.ForeignKey(Author, on_delete=models.CASCADE)
     image = models.ImageField()
     categories = models.ManyToManyField(Category)
+    featured = models.BooleanField()  # this is for make the post looks one left and other right
 
     def __str__(self):
         return self.title
