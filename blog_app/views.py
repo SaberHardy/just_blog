@@ -4,9 +4,11 @@ from blog_app.models import Post
 
 
 def index(request):
-    queryset = Post.objects.filter(featured=True)
+    featured = Post.objects.filter(featured=True)
+    latest = Post.objects.order_by('-timestamp')[:3]
     context = {
-        'object_list': queryset
+        'object_list': featured,
+        'latest': latest,
     }
     return render(request, 'blog_app/index.html', context=context)
 
