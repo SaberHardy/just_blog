@@ -38,7 +38,7 @@
                 <div class="row d-flex align-items-stretch">
                     {% if not forloop.first and not forloop.last %}
                         <div class="image col-lg-5">
-                            <img src="{{ object.image.url }}" alt="...">
+                            <img src="{{ object.image.url }}" alt="..." style="width: 350px">
                         </div>
                     {% endif %}
                     <div class="text col-lg-7">
@@ -71,7 +71,7 @@
                         </div>
                     </div>
                     {% if forloop.first or forloop.last %}
-                        <div class="image col-lg-5"><img src="{{ object.image.url }}" alt="..."></div>
+                        <div class="image col-lg-5"><img src="{{ object.image.url }}" alt="..." style="width: 350px;"></div>
                     {% endif %}
                 </div>
             {% endfor %}
@@ -138,7 +138,8 @@
                 </div>
                 <div class="col-md-8">
                     <div class="form-holder">
-                        <form action="#">
+                        <form action="." method="post">
+                            {% csrf_token %}
                             <div class="form-group">
                                 <input type="email" name="email" id="email" placeholder="Type your email address">
                                 <button type="submit" class="submit">Subscribe</button>
