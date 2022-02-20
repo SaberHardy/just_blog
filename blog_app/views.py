@@ -1,8 +1,14 @@
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.db.models import Count
 from django.shortcuts import render
 
 from blog_app.models import Post
 from marketing.models import Signup
+
+
+def get_category_count():
+    queryset = Post.objects.values('categories__title').annotate(Count('categories__title'))
+    return queryset
 
 
 def index(request):
@@ -14,7 +20,6 @@ def index(request):
         new_signup = Signup()
         new_signup.email = email
         new_signup.save()
-
     context = {
         'object_list': featured,
         'latest': latest,
@@ -27,6 +32,7 @@ def post(request, id):
 
 
 def blog(request):
+    category_count = get_category_count()
     post_list = Post.objects.all()
     most_recent = Post.objects.order_by('-timestamp')[:3]
     paginator = Paginator(post_list, per_page=4)
@@ -43,5 +49,6 @@ def blog(request):
         'queryset': paginated_queryset,
         'most_recent': most_recent,
         'page_request_var': page_request_var,
+        'category_count': category_count,
     }
     return render(request, 'blog_app/blog.html', context=context)
