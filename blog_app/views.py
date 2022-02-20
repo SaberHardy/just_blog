@@ -26,4 +26,8 @@ def post(request):
 
 
 def blog(request):
-    return render(request, 'blog_app/blog.html')
+    post_list = Post.objects.all()
+    context = {
+        'post_list': post_list
+    }
+    return render(request, 'blog_app/blog.html', context=context)
