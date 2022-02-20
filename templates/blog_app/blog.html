@@ -12,7 +12,7 @@
                         {% for post in queryset %}
                             <div class="post col-xl-6">
                                 <div class="post-thumbnail">
-                                    <a href="{% url 'index' %}">
+                                    <a href="{{ post.get_absolute_url }}">
                                         <img src="{{ post.image.url }}" style="height: 200px; width: 400px"
                                              alt="..." class="img-fluid">
                                     </a>
@@ -62,7 +62,12 @@
                                     </a>
                                 </li>
                             {% endif %}
-                            <li class="page-item"><a href="#" class="page-link active">{{ queryset.number }}</a></li>
+
+                            <li class="page-item">
+                                <a href="?{{ page_request_var }}={{ queryset.number }}" class="page-link active">
+                                    {{ queryset.number }}
+                                </a>
+                            </li>
 
                             {% if queryset.has_next %}
                                 <li class="page-item">
@@ -89,45 +94,31 @@
                         </div>
                     </form>
                 </div>
+
                 <!-- Widget [Latest Posts Widget]        -->
                 <div class="widget latest-posts">
                     <header>
                         <h3 class="h6">Latest Posts</h3>
                     </header>
-                    <div class="blog-posts"><a href="#">
-                        <div class="item d-flex align-items-center">
-                            <div class="image"><img src="{% static 'img/small-thumbnail-1.jpg' %}" alt="..."
-                                                    class="img-fluid"></div>
-                            <div class="title"><strong>Alberto Savoia Can Teach You About</strong>
-                                <div class="d-flex align-items-center">
-                                    <div class="views"><i class="icon-eye"></i> 500</div>
-                                    <div class="comments"><i class="icon-comment"></i>12</div>
+                    <div class="blog-posts">
+                        {% for post in most_recent %}
+
+                            <a href="{{ post.get_absolute_url }}">
+                                <div class="item d-flex align-items-center">
+                                    <div class="image">
+                                        <img src="{{ post.image.url }}" alt="..." class="img-fluid"></div>
+                                    <div class="title"><strong>{{ post.title }}</strong>
+                                        <div class="d-flex align-items-center">
+                                            <div class="views"><i class="icon-eye"></i> {{ post.view_count }} </div>
+                                            <div class="comments"><i class="icon-comment"></i>{{ post.comment_count }}
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
-                    </a><a href="#">
-                        <div class="item d-flex align-items-center">
-                            <div class="image"><img src="{% static 'img/small-thumbnail-2.jpg' %}" alt="..."
-                                                    class="img-fluid"></div>
-                            <div class="title"><strong>Alberto Savoia Can Teach You About</strong>
-                                <div class="d-flex align-items-center">
-                                    <div class="views"><i class="icon-eye"></i> 500</div>
-                                    <div class="comments"><i class="icon-comment"></i>12</div>
-                                </div>
-                            </div>
-                        </div>
-                    </a><a href="#">
-                        <div class="item d-flex align-items-center">
-                            <div class="image"><img src="{% static 'img/small-thumbnail-3.jpg' %}" alt="..."
-                                                    class="img-fluid"></div>
-                            <div class="title"><strong>Alberto Savoia Can Teach You About</strong>
-                                <div class="d-flex align-items-center">
-                                    <div class="views"><i class="icon-eye"></i> 500</div>
-                                    <div class="comments"><i class="icon-comment"></i>12</div>
-                                </div>
-                            </div>
-                        </div>
-                    </a></div>
+                            </a>
+                        {% endfor %}
+
+                    </div>
                 </div>
                 <!-- Widget [Categories Widget]-->
                 <div class="widget categories">
