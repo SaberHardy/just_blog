@@ -3,7 +3,7 @@
 {#{% load static %}#}
 {% block content %}
     <div class="col-5 offset-3 mb-4 mt-5">
-    <h3>Create an article</h3>
+    <h3>{{ title }} an article</h3>
         {{ form.media }}
     <form method="post" action="." enctype="multipart/form-data">
         {% csrf_token %}
