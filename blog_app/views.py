@@ -1,6 +1,6 @@
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.db.models import Count, Q
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 
 from blog_app.models import Post
 from marketing.models import Signup
@@ -41,7 +41,13 @@ def index(request):
 
 
 def post(request, id):
-    return render(request, 'blog_app/post.html', {})
+    post = get_object_or_404(Post, id=id)
+    category_count = get_category_count()
+    context = {
+        'post': post,
+        'category_count': category_count,
+    }
+    return render(request, 'blog_app/post.html', context)
 
 
 def blog(request):
