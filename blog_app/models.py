@@ -30,6 +30,8 @@ class Post(models.Model):
     categories = models.ManyToManyField(Category)
     featured = models.BooleanField()  # this is for make the post looks one left and other right
     content = HTMLField()
+    previous_post = models.ForeignKey('self', related_name='previous', on_delete=models.SET_NULL, blank=True, null=True)
+    next_post = models.ForeignKey('self', related_name='next', on_delete=models.SET_NULL, blank=True, null=True)
 
     def __str__(self):
         return self.title
