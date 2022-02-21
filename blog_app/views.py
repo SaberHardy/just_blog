@@ -4,7 +4,7 @@ from django.db.models import Count, Q
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse
 
-from blog_app.forms import CommentForm
+from blog_app.forms import CommentForm, PostForm
 from blog_app.models import Post
 from marketing.models import Signup
 
@@ -84,3 +84,25 @@ def blog(request):
         'category_count': category_count,
     }
     return render(request, 'blog_app/blog.html', context=context)
+
+
+def post_create(request):
+    form = PostForm(request.POST or None)
+    if request.method == "POST":
+        if form.is_valid():
+            form.save()
+            return redirect(reverse("post-detail", kwargs={
+                'id': form.instance.id
+            }))
+    context = {
+        'form': form
+    }
+    return render(request, 'blog_app/create_post.html', context)
+
+
+def post_update(request, id):
+    pass
+
+
+def post_delete(request, id):
+    pass
