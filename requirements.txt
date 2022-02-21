@@ -1,5 +1,8 @@
 asgiref==3.5.0
 backports.zoneinfo==0.2.1
 Django==4.0.2
+django-tinymce==3.4.0
+django-tinymce4-lite==1.8.0
+jsmin==3.0.1
 Pillow==9.0.1
 sqlparse==0.4.2

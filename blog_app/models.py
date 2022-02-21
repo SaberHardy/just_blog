@@ -1,6 +1,7 @@
 from django.contrib.auth.models import User
 from django.db import models
 from django.urls import reverse
+from tinymce import models as tinymce_models
 
 
 class Author(models.Model):
@@ -28,6 +29,7 @@ class Post(models.Model):
     image = models.ImageField()
     categories = models.ManyToManyField(Category)
     featured = models.BooleanField()  # this is for make the post looks one left and other right
+    content = tinymce_models.HTMLField()
 
     def __str__(self):
         return self.title
