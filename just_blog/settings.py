@@ -26,7 +26,10 @@ INSTALLED_APPS = [
     'marketing.apps.MarketingConfig',
 
     'tinymce',
+    'crispy_forms',
 ]
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -109,3 +112,6 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static_files')
 
 MEDIA_URL = 'media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+
+LOGIN_REDIRECT_URL = 'index'

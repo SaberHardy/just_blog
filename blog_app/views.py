@@ -1,11 +1,11 @@
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import login as auth_login
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.db.models import Count, Q
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse
 
 from blog_app.forms import CommentForm, PostForm
-from blog_app.models import Post
+from blog_app.models import Post, Author
 from marketing.models import Signup
 
 
@@ -48,6 +48,8 @@ def post(request, id):
     category_count = get_category_count()
     most_recent = Post.objects.order_by('-timestamp')[:3]
     form = CommentForm(request.POST or None)
+    print(f"The user is id-{request.user}")
+
     if request.method == "POST":
         if form.is_valid():
             form.instance.user = request.user
@@ -86,10 +88,21 @@ def blog(request):
     return render(request, 'blog_app/blog.html', context=context)
 
 
+def get_author(user):
+    qs = Author.objects.filter(user=user)
+    if qs.exists():
+        return qs[0]
+    return None
+
+
 def post_create(request):
-    form = PostForm(request.POST or None)
+    form = PostForm(request.POST or None, request.FILES or None)
+    author = get_author(request.user)
+
+    print(f"the user is: {request.user}")
     if request.method == "POST":
         if form.is_valid():
+            form.instance.author = author
             form.save()
             return redirect(reverse("post-detail", kwargs={
                 'id': form.instance.id
