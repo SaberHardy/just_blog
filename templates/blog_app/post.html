@@ -47,7 +47,8 @@
                             <div class="posts-nav d-flex justify-content-between align-items-stretch flex-column flex-md-row">
                                 {% if post.previous_post %}
 
-                                    <a href="{{ post.previous_post.get_absolute_url }}" class="prev-post text-left d-flex align-items-center">
+                                    <a href="{{ post.previous_post.get_absolute_url }}"
+                                       class="prev-post text-left d-flex align-items-center">
                                         <div class="icon prev"><i class="fa fa-angle-left"></i></div>
                                         <div class="text"><strong class="text-primary">Previous Post </strong>
                                             <h6>{{ post.previous_post.title }}</h6>
@@ -56,7 +57,8 @@
                                 {% endif %}
 
                                 {% if post.next_post %}
-                                    <a href="{{ post.next_post.get_absolute_url }}" class="next-post text-right d-flex align-items-center justify-content-end">
+                                    <a href="{{ post.next_post.get_absolute_url }}"
+                                       class="next-post text-right d-flex align-items-center justify-content-end">
                                         <div class="text"><strong class="text-primary">Next Post </strong>
                                             <h6>{{ post.next_post.title }}</h6>
                                         </div>
@@ -118,20 +120,12 @@
                                 <header>
                                     <h3 class="h6">Leave a reply</h3>
                                 </header>
-                                <form action="#" class="commenting-form">
+                                <form action="." method="post" class="commenting-form">
+
                                     <div class="row">
-                                        <div class="form-group col-md-6">
-                                            <input type="text" name="username" id="username" placeholder="Name"
-                                                   class="form-control">
-                                        </div>
-                                        <div class="form-group col-md-6">
-                                            <input type="email" name="username" id="useremail"
-                                                   placeholder="Email Address (will not be published)"
-                                                   class="form-control">
-                                        </div>
+                                        {% csrf_token %}
                                         <div class="form-group col-md-12">
-                                            <textarea name="usercomment" id="usercomment"
-                                                      placeholder="Type your comment" class="form-control"></textarea>
+                                            {{ form }}
                                         </div>
                                         <div class="form-group col-md-12">
                                             <button type="submit" class="btn btn-secondary">Submit Comment</button>
@@ -143,7 +137,7 @@
                     </div>
                 </div>
             </main>
-            {% include 'blog_app/aside_bar.html' with most_recent=most_recent category_count=category_count  %}
+            {% include 'blog_app/aside_bar.html' with most_recent=most_recent category_count=category_count %}
         </div>
     </div>
 {% endblock %}
