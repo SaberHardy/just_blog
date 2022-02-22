@@ -3,7 +3,7 @@
 {% block content %}
 
     <h1 class="form-group d-flex justify-content-center align-items-center container">Register. . . !</h1>
-    <div class="form-group d-flex justify-content-center align-items-center container">
+    <div class="form-group justify-content-center align-items-center container">
         <form method="post">
             {% csrf_token %}
             {{ form|crispy }}
