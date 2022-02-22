@@ -8,6 +8,8 @@ urlpatterns = [
     path('', include('blog_app.urls')),
     path('tinymce/', include('tinymce.urls')),
     path('accounts/', include('allauth.urls')),
+    path('members/', include('members.urls')),
+    path('members/', include('django.contrib.auth.urls')),
 ]
 
 if settings.DEBUG:
