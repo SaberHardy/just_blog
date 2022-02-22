@@ -1,0 +1,16 @@
+{% extends 'blog_app/base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+    <h1 class="form-group d-flex justify-content-center align-items-center container">Register. . . !</h1>
+    <div class="form-group d-flex justify-content-center align-items-center container">
+        <form method="post">
+            {% csrf_token %}
+            {{ form|crispy }}
+            <br/>
+            <button type="submit" class="btn btn-success col-md-12 text-center submit-btn">
+                Register
+            </button>
+        </form>
+    </div>
+{% endblock %}
