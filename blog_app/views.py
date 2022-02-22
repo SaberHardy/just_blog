@@ -148,3 +148,46 @@ def post_delete(request, id):
     post = get_object_or_404(Post, id=id)
     post.delete()
     return redirect('post-list')
+
+
+"""
+This is for render matplotlib images after plotting
+from django.shortcuts import render
+import matplotlib.pyplot as plt
+import base64
+import urllib
+import io
+
+
+def index(request):
+    if request.method == "POST":
+        cat = list(request.POST['xaxis'].split(','))
+        dog = list(request.POST['yaxis'].split(','))
+        activity = list(request.POST['activity'].split(','))
+
+        fig, ax = plt.subplots()
+        ax.plot(activity, dog, label="dog")
+        ax.plot(activity, cat, label="cat")
+        ax.legend()
+
+        buf = io.BytesIO()
+        fig.savefig(buf, format='png')
+        buf.seek(0)
+        string = base64.b64encode(buf.read())
+
+        uri = 'data:image/png;base64,' + urllib.parse.quote(string)
+
+        context = {'image': uri}
+
+        return render(request, 'index.html', context=context)
+    else:
+        return render(request, 'index.html')
+
+
+In Template use this
+
+{% if image %}
+    <img src="{{ image }}">
+{% endif %}
+
+"""
