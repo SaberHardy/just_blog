@@ -24,10 +24,17 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'blog_app.apps.BlogAppConfig',
     'marketing.apps.MarketingConfig',
+    'django.contrib.sites',
 
     'tinymce',
     'crispy_forms',
+
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
 ]
+
+SITE_ID = 1
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
@@ -113,5 +120,9 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static_files')
 MEDIA_URL = 'media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-
 LOGIN_REDIRECT_URL = 'index'
+
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
+]
