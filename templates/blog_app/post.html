@@ -18,10 +18,12 @@
                                         <a href="#">{{ category }}</a>
                                     {% endfor %}
                                 </div>
-                                <div>
-                                    <a href="{% url 'post-update' id=post.id %}">Update</a>
-                                    <a href="{% url 'post-delete' id=post.id %}">Delete</a>
-                                </div>
+                                {% if user.is_authenticated %}
+                                    <div>
+                                        <a href="{% url 'post-update' id=post.id %}">Update</a>
+                                        <a href="{% url 'post-delete' id=post.id %}">Delete</a>
+                                    </div>
+                                {% endif %}
                             </div>
                             <h1>{{ post.title }}<a href="#">
                                 <i class="fa fa-bookmark-o"></i></a>
@@ -37,9 +39,11 @@
                                 <div class="d-flex align-items-center flex-wrap">
                                     <div class="date"><i class="icon-clock"></i>{{ post.timestamp|timesince }} ago</div>
                                     <div class="views"><i class="icon-eye"></i> {{ post.view_count }}</div>
-                                    <div class="comments meta-last">
-                                        <i class="icon-comment"></i>{{ post.comment_count }}
-                                    </div>
+                                    {% if user.is_authenticated %}
+                                        <div class="comments meta-last">
+                                            <i class="icon-comment"></i>{{ post.comment_count }}
+                                        </div>
+                                    {% endif %}
                                 </div>
                             </div>
                             <div class="post-body">
@@ -115,7 +119,8 @@
                                     </form>
                                 </div>
                             {% else %}
-                                <a href="{% url 'account_login' %}" type="submit" class="btn btn-primary">Login to comment</a>
+                                <a href="{% url 'account_login' %}" type="submit" class="btn btn-primary">Login to
+                                    comment</a>
                             {% endif %}
                         </div>
                     </div>

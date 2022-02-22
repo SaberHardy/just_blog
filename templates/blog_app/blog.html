@@ -12,7 +12,7 @@
                         {% for post in queryset %}
                             <div class="post col-xl-6">
                                 <div class="post-thumbnail">
-                                    <a href="{{ post.get_absolute_url }}">
+                                    <a href="{% if user.is_authenticated %}{{ post.get_absolute_url }}{% endif %}">
                                         <img src="{{ post.image.url }}" style="height: 200px; width: 400px"
                                              alt="..." class="img-fluid">
                                     </a>
@@ -41,10 +41,12 @@
                                             <i class="icon-clock"></i>
                                             {{ post.timestamp|date:"g:i a" }}
                                         </div>
+                                        {% if user.is_authenticated %}
                                         <div class="comments meta-last">
                                             <i class="icon-comment"></i>
                                             {{ post.comment_count }}
                                         </div>
+                                        {% endif %}
                                     </footer>
                                 </div>
                             </div>

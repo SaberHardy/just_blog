@@ -50,7 +50,9 @@
                                             <a href="#">{{ category }}</a>
                                         {% endfor %}
                                     </div>
-                                    <a href="/post">
+                                    <a href="{% if user.is_authenticated %}
+                                                {% url 'post-detail' object.id %}
+                                                {% endif %}">
                                         <h2 class="h4">{{ object.title }}</h2>
                                     </a>
                                 </header>
@@ -65,13 +67,17 @@
                                     </a>
                                     <div class="date"><i class="icon-clock"></i>{{ object.timestamp|timesince }} ago
                                     </div>
-                                    <div class="comments"><i class="icon-comment"></i>{{ object.comment_count }}</div>
+                                    {% if user.is_authenticated %}
+                                        <div class="comments"><i class="icon-comment"></i>{{ object.comment_count }}
+                                        </div>
+                                    {% endif %}
                                 </footer>
                             </div>
                         </div>
                     </div>
                     {% if forloop.first or forloop.last %}
-                        <div class="image col-lg-5"><img src="{{ object.image.url }}" alt="..." style="width: 350px;"></div>
+                        <div class="image col-lg-5"><img src="{{ object.image.url }}" alt="..." style="width: 350px;">
+                        </div>
                     {% endif %}
                 </div>
             {% endfor %}
