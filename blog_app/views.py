@@ -5,7 +5,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse
 
 from blog_app.forms import CommentForm, PostForm
-from blog_app.models import Post, Author
+from blog_app.models import Post, Author, PostView
 from marketing.models import Signup
 
 
@@ -47,6 +47,9 @@ def post(request, id):
     post = get_object_or_404(Post, id=id)
     category_count = get_category_count()
     most_recent = Post.objects.order_by('-timestamp')[:3]
+
+    PostView.objects.get_or_create(user=request.user, post=post)
+
     form = CommentForm(request.POST or None)
     print(f"The user is id-{request.user}")
 
