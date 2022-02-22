@@ -3,14 +3,21 @@
 {% block content %}
 
     <h1 class="form-group d-flex justify-content-center align-items-center container">Login. . . !</h1>
-    <div class="form-group d-flex justify-content-center align-items-center container">
+    <div class="form-group col-5 container">
         <form method="post">
             {% csrf_token %}
-            {{ form|crispy }}
+{#                        {{ form|crispy }}#}
+            <input class="form-control mb-2" type="text" name="username" placeholder="Type your email here"
+                   aria-label="default input example">
+            <input class="form-control" type="password" name="password" placeholder="Type your password here"
+                   aria-label="default input example">
             <br/>
             <button type="submit" class="btn btn-success col-md-12 text-center submit-btn">
                 Login
             </button>
+            <small>If you're not a member
+                <a class="mb-3" href="{% url 'register' %}" style="color: blue"> Register here!</a>
+            </small>
         </form>
     </div>
 {% endblock %}
